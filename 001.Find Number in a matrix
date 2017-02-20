@@ -27,12 +27,12 @@ class Solution{
 			int i=0,j=row-1;
 			while(i<row && j>=0)
 			{
-				if(a[i][j]==num)
+				if(a[row*i][j]==num)
 				{
 					return 1;
 					break;
 				}
-				else if(a[i][j]>num)
+				else if(a[row*i][j]>num)
 					j--;
 				else	
 					i++;
