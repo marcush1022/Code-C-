@@ -1,0 +1,71 @@
+#include <iostream>
+#include <cstdio>
+#include <fstream>
+#include <algorithm>
+#include <cmath>
+#include <deque>
+#include <vector>
+#include <queue>
+#include <string>
+#include <cstring>
+#include <map>
+#include <stack>
+#include <set>
+using namespace std;
+
+const int N=10;
+
+class Solution {
+public:
+    void RemoveBlank(char str[], int length)
+	{
+		int i;
+		if(length<0 || str==NULL)
+			return ;
+		int originLength=0, newLength=0, blankNum=0;
+		while(str[i]!='\0')
+		{
+      //the origin length of the stirng
+			originLength++;    
+			if(str[i]==' ')
+				blankNum++;
+			i++;
+		}
+
+    //length of the string after replaced
+		newLength=originLength+blankNum*2;
+
+		if(newLength>length)
+			return;					//overflow
+
+		int leftPoint=originLength;
+		int rightPoint=newLength;
+
+		while(leftPoint>=0 && leftPoint<rightPoint)
+		{
+			if(str[leftPoint]==' ')
+			{
+				str[rightPoint--]='0';
+				str[rightPoint--]='2';
+				str[rightPoint--]='%';
+			}
+			else
+				str[rightPoint--]=str[leftPoint];
+			leftPoint--;
+		}
+
+    }
+};
+
+int main()
+{
+	Solution s;
+	int length=100;
+	char str[length]="    ";
+	s.RemoveBlank(str,length);
+	cout<<str;
+}
+
+//O(n)
+
+
