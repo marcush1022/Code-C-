@@ -2,47 +2,51 @@
 //Every rows and columes are in an increase order in the maxtrix
 //Return true or false as a represent find it or not
 
-
-#include <iostream> 
-#include <cstdio> 
-#include <fstream> 
-#include <algorithm> 
-#include <cmath> 
-#include <deque> 
-#include <vector> 
-#include <queue> 
-#include <string> 
-#include <cstring> 
-#include <map> 
-#include <stack> 
-#include <set> 
+#include <iostream>
+#include <cstdio>
+#include <fstream>
+#include <algorithm>
+#include <cmath>
+#include <deque>
+#include <vector>
+#include <queue>
+#include <string>
+#include <cstring>
+#include <map>
+#include <stack>
+#include <set>
 using namespace std;
 
 class Solution{
-	public: 
-		int FindNum(int *a, int row, int col,int num)
+	public:
+		int FindNum(int* a, int row, int col,int num)
 		{
+		    int flag=0;
 			if(a==NULL || row<=0 || col<=0)
-				return 0;
+				flag=0;
 			int i=0,j=row-1;
 			while(i<row && j>=0)
 			{
-				if(a[row*i][j]==num)
+				if(a[row*i+j]==num)
 				{
-					return 1;
+				    cout<<"row*i= "<<row*i<<" j= "<<j<<endl;
+					flag= 1;
 					break;
 				}
-				else if(a[row*i][j]>num)
+				else if(a[row*i+j]>num)
 					j--;
-				else	
+				else
 					i++;
 			}
+			return flag;
 		}
 };
 
 int main()
 {
 	int matrix[][4] = {{1, 2, 8, 9}, {2, 4, 9, 12}, {4, 7, 10, 13}, {6, 8, 11, 15}};
-	cout<<FindNum(matrix,2);
+	Solution s;
+	cout<<s.FindNum((int*)matrix,4,4,15);
     return 0;
 }
+
