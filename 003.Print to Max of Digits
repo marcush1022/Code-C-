@@ -1,0 +1,69 @@
+/************************************************************************************/
+input a number n, print decimal number from 1 to n
+example:
+input 3, output 1,2,3,......,999
+/************************************************************************************/
+
+bool increNumber(char *number)
+{
+	bool isOverFlow=false;
+	int carry=0;
+	int len=strlen(number);
+
+	for(int i=len-1;i>=0;i--)
+	{
+		int nSum=number[i]-'0'+carry;
+		if(i==len-1)
+			nSum++;
+		if(nSum>=10)
+		{
+			if(i==0)
+				isOverFlow=true;
+			else
+			{
+				carry=1;
+				nSum-=10;
+				number[i]='0'+nSum;
+			}
+		}
+		else
+		{
+			number[i]='0'+nSum;
+			break;
+		}
+	}
+}
+void PrintNumber(char *number)
+{
+	int len=strlen(number);
+	bool isBegin0=true;
+	for(int i=0;i<len;i++)
+	{
+	    if(isBegin0 && number[i]!='0')
+            isBegin0=false;
+		if(!isBegin0)
+			cout<<number[i];
+	}
+	 printf("\t");
+}
+
+void printMaxDigits(int n)
+{
+	if(n<=0)
+		return ;
+	char *number=new char[n+1];
+	memset(number, '0','n');
+	number[n]='\0';
+
+	while(!increNumber(number))
+	{
+		PrintNumber(number);
+	}
+}
+
+int main()
+{
+	printMaxDigits(2);
+	return 0;
+}
+
