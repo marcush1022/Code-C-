@@ -1,0 +1,39 @@
+/**********************************************************************************/
+Input a integier array, write a function to reorder the array, put the odd number 
+at the front of the array, and even number at the back of the array
+/**********************************************************************************/
+
+class Solution {
+public:
+    void reorderList(int *L, int length)
+	{
+		int left, right,temp;
+		left=0;
+		right=length-1;
+		while(left<right)
+		{
+			while(left<right&&L[right]%2==0)
+                right--;
+            while(left<right&&L[left]%2!=0)
+                left++;
+            temp=L[right];
+            L[right]=L[left];
+            L[left]=temp;
+		}
+	}
+	
+
+};
+
+int main()
+{
+	Solution s;
+	int a[]={1,2,3,4,5};
+	int i=0;
+	s.reorderList(a, 5);
+	while(i<5)
+	{
+		cout<<a[i]<<",";
+		i++;
+	}
+}
