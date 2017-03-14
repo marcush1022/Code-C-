@@ -1,0 +1,75 @@
+/****************************************************************************/
+Get the Kth node from end of a linklist, 
+for example: 
+input list=1,2,3,4,5,6, val=3
+output 4
+/****************************************************************************/
+
+ struct ListNode {
+     int val;
+     ListNode *next;
+     ListNode(int x) : val(x), next(NULL) {}
+ };
+
+class Solution {
+public:
+    ListNode* FindKthToTail(ListNode* head, int k) {
+        //cout<<"FFFFF"<<endl;
+        if(head==NULL)
+            return head;
+        ListNode* left, *right;
+		right=left=head;
+		int i=1;
+		cout<<"left val1= "<<left->val<<endl;
+		while(i<k)
+		{
+		    if(right!=NULL || right->next!=NULL)
+            {
+               return NULL;
+            }
+			else
+			{
+			     right=right->next;
+                i++;
+			}
+
+		}
+        cout<<"right val= "<<right->val<<endl;
+		while(right->next!=NULL)
+		{
+			right=right->next;
+			//cout<<"right val= "<<right->val<<",";
+			left=left->next;
+			//cout<<"left val= "<<left->val<<",";
+		}
+		cout<<endl;
+		cout<<"left val2= "<<left->val<<endl;
+		//cout<<"WWWWW22"<<endl;
+		return left;
+	}
+};
+
+int main()
+{
+	ListNode* head=new ListNode (1);
+	Solution s;
+	int length=6;
+	ListNode* p=head;
+	ListNode* pOut=head;
+	//cout<<"!!!!"<<endl;
+	for(int i=0;i<length;i++)
+	{
+		ListNode *pNew=new ListNode(i+2);
+		p->next=pNew;
+		p=p->next;
+	}
+    for(int i=0;i<=length;i++)
+	{
+		cout<<pOut->val<<",";
+		pOut=pOut->next;
+	}
+	cout<<endl;
+	//head=NULL;
+	ListNode* pre=s.FindKthToTail(head,9);
+	//cout<<"last= "<<pre->val<<endl;
+}
