@@ -1,0 +1,35 @@
+/********************************************************************************************/
+Convert a binary search tree to a sorted double linked list.
+Do not create any new nodes, only can change the points of the nodes.
+/********************************************************************************************/
+
+class Solution {
+public:
+    void getConvertTree(TreeNode* Node, TreeNode** LastNode)
+	{
+		if(Node==NULL)
+			return ;
+		TreeNode* cur=Node;
+		if(cur->left!=NULL)
+			getConvertTree(cur->left, LastNode);
+		
+		cur->left=LastNode;
+		if(*LastNode!=NULL)
+			*LastNode->right=cur;
+		
+		*LastNode=cur;
+		if(cur->right!=NULL)
+			getConvertTree(cur->right, LastNode);
+	}
+	
+	TreeNode* convertTree(TreeNode* root)
+	{
+		TreeNode* LastNode=NULL;
+		getConvertTree(root, &LastNode);
+		TreeNode* HeadNode=LastNode;
+		while(HeadNode->left!=NULL && HeadNode!=NULL)
+			HeadNode=HeadNode->left;
+		
+		return HeadNode;
+	}
+};
