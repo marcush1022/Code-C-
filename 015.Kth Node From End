@@ -18,34 +18,34 @@ public:
         if(head==NULL)
             return head;
         ListNode* left, *right;
-		right=left=head;
-		int i=1;
-		cout<<"left val1= "<<left->val<<endl;
-		while(i<k)
-		{
-		    if(right!=NULL || right->next!=NULL)
-            {
-               return NULL;
-            }
-			else
-			{
-			     right=right->next;
-                i++;
-			}
-
-		}
-        cout<<"right val= "<<right->val<<endl;
-		while(right->next!=NULL)
+	right=left=head;
+	int i=1;
+	cout<<"left val1= "<<left->val<<endl;
+	while(i<k)
+	{
+		if(right!=NULL || right->next!=NULL)
+            	{
+               		return NULL;
+            	}
+		else
 		{
 			right=right->next;
-			//cout<<"right val= "<<right->val<<",";
-			left=left->next;
-			//cout<<"left val= "<<left->val<<",";
+                	i++;
 		}
-		cout<<endl;
-		cout<<"left val2= "<<left->val<<endl;
-		//cout<<"WWWWW22"<<endl;
-		return left;
+
+	}
+        cout<<"right val= "<<right->val<<endl;
+	while(right->next!=NULL)
+	{
+		right=right->next;
+		//cout<<"right val= "<<right->val<<",";
+		left=left->next;
+		//cout<<"left val= "<<left->val<<",";
+	}
+	cout<<endl;
+	cout<<"left val2= "<<left->val<<endl;
+	//cout<<"WWWWW22"<<endl;
+	return left;
 	}
 };
 
@@ -63,7 +63,7 @@ int main()
 		p->next=pNew;
 		p=p->next;
 	}
-    for(int i=0;i<=length;i++)
+    	for(int i=0;i<=length;i++)
 	{
 		cout<<pOut->val<<",";
 		pOut=pOut->next;
