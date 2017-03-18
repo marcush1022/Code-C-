@@ -4,21 +4,20 @@ input a int sequence, verify it is a post order traversal of a binary search tre
 
 class Solution {
 public:
-    bool isBST(int sequence[], int length)
+   	bool isBST(int sequence[], int length)
 	{
 		if(sequence==NULL || length==0)
 			return false;
 
 		int root=sequence[length-1];
 
-        int i;
+        	int i;
 		for(i=0;i<length-1;i++)
 		{
 			if(sequence[i]>root)
 				break;
-
 		}
-		int j=i+1;
+		int j=i;
 		for(j;j<length-1;j++)
 		{
 			if(sequence[j]<root)
@@ -37,11 +36,12 @@ public:
 int main()
 {
 	//int data[] = {4, 8, 6, 12, 16, 14, 10};
-    //int data[] = {4, 6, 7, 5};
-    int data[] = {4, 6, 12, 8, 16, 14, 10};
+    	//int data[] = {4, 6, 7, 5};
+    	int data[] = {5,7,6,10,1,8};
 	Solution s;
 	if(s.isBST(data, 7)==true)
-        cout<<"true"<<endl;
-    if(s.isBST(data, 7)==false)
-        cout<<"false"<<endl;
+        	cout<<"true"<<endl;
+    	if(s.isBST(data, 7)==false)
+        	cout<<"false"<<endl;
 }
+
