@@ -13,12 +13,12 @@ public:
 		while(left<right)
 		{
 			while(left<right&&L[right]%2==0)
-                right--;
-            while(left<right&&L[left]%2!=0)
-                left++;
-            temp=L[right];
-            L[right]=L[left];
-            L[left]=temp;
+                		right--;
+            		while(left<right&&L[left]%2!=0)
+                		left++;
+            		temp=L[right];
+            		L[right]=L[left];
+            		L[left]=temp;
 		}
 	}
 	
