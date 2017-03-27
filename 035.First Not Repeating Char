@@ -8,22 +8,22 @@ class Solution {
 public:
 	char firstNotRepeatingChar(char* str)
 	{
-	    cout<<str<<endl;
+	    	cout<<str<<endl;
 		int ex[256];
 		memset(ex, 0, sizeof(ex));
 		cout<<sizeof(ex)<<endl;
 		for(int i=0; str[i]!='\0'; i++)
-        {
-            ex[str[i]]++;
-        }
+        	{
+            		ex[str[i]]++;
+        	}
 
 
 		for(int i=0; str[i]!='\0'; i++)
 		{
 			if(ex[str[i]]==1)
-            {
-                return str[i];
-            }
+            		{
+                		return str[i];
+            		}
 		}
 		return '\0';
 	}
