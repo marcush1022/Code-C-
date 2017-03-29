@@ -51,15 +51,15 @@ public:
 
 	int getNumK(int *data, int length, int k)
 	{
-	    int num=0;
+	    	int num=0;
 		int left=0, right=length-1;
 		int first=getFirstK(data, k, left, right, length);
 		int last=getLastK(data, k, left, right, length);
 
-        if(length>0 || data!=NULL)
+        	if(length>0 || data!=NULL)
 		{
 		    if(last>-1 && first>-1)
-                num= last-first+1;
+                	num= last-first+1;
 		}
 		return num;
 	}
