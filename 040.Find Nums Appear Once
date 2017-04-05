@@ -39,7 +39,7 @@ class Solution
 
 		unsigned int indexOf1=findFirst1(XOR);
 
-        *ret1 = *ret2=0;
+        	*ret1 = *ret2=0;
 		for(int j=0; j<length; ++j)
 		{
 			if(isBit1(data[j], indexOf1))
