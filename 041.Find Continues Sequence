@@ -1,0 +1,49 @@
+/************************************************************************************/
+Input an non negative number s, print all non negative continues sequence which sum 
+is s.
+Example: input: 15
+output: 1~5, 4~6, 7~8
+/************************************************************************************/
+
+
+void printNums(int small, int big)
+{
+	for(int i=small; i<=big; i++)
+	{
+		cout<<i<<",";
+	}
+	cout<<endl;
+}
+
+void FindSequence(int sum)
+{
+	int small, big;
+	small=1, big=2;
+	int middle=(1+sum)/2;
+	int curSum=small+big;
+
+	while(small<middle)
+	{
+		if(curSum==sum)
+			printNums(small, big);
+		while(curSum > sum)
+		{
+			curSum-=small;
+			small++;
+			if(curSum==sum)
+				printNums(small, big);
+		}
+		big++;
+		curSum+=big;
+	}
+}
+
+
+int main()
+{
+    int sum=9;
+	FindSequence(sum);
+
+    return 0;
+}
+
