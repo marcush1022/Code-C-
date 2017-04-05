@@ -1,0 +1,62 @@
+/*************************************************************************/
+Input a sentence, and do left rotate.
+Example: Input: "abcdefg"
+Output: "cdefgab"
+/*************************************************************************/
+
+void getReverse(char *start, char *end)
+{
+	if(start==NULL || end==NULL)
+		return ;
+	while(start<end)
+	{
+		char temp=*start;
+		*start=*end;
+		*end=temp;
+		start++;
+		end--;
+	}
+}
+
+char* leftRotateWords(char *data, int n)
+{
+	if(data==NULL)
+		return NULL;
+	char *start=data;
+	char *end=data;
+	int length=0;
+
+	while(*end!='\0')
+	{
+		length++;
+		end++;
+	}
+	end--;
+
+
+	char *start1, *start2, *end1, *end2;
+	start1=data;
+	end1=data+n-1;
+	start2=data+n;
+	end2=start1+length-1;
+	getReverse(start1, end1);
+	getReverse(start2, end2);
+
+	getReverse(start, end);
+
+	return data;
+
+}
+
+int main()
+{
+    char data[]="abcdefg";
+    //char data[]="ab c de f g";
+	leftRotateWords(data, 2);
+	for(int i=0; data[i]!='\0'; i++)
+	{
+		cout<<data[i];
+	}
+    return 0;
+}
+
