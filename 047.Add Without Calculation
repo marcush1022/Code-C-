@@ -1,0 +1,24 @@
+/*********************************************************************************/
+Calculate the sum of two numbers, but cannot use +, -, *, /
+/*********************************************************************************/
+
+int Add(int num1, int num2)
+{
+	int sum, carry;
+	while(num2!=0)
+	{
+		sum=num1^num2;
+		cout<<"sum="<<sum<<endl;
+		carry=(num1 & num2)<<1;
+
+		num1=sum;
+		num2=carry;
+	}
+	return num1;
+}
+
+int main()
+{
+    int a=-1, b=20;
+    cout<<Add(a, b)<<endl;
+}
