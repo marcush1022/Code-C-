@@ -1,0 +1,46 @@
+/************************************************************************************/
+Calculate the sum of 1+2+3...+n, no use of *, /, while, for, if, else,(A?B:C) etc.
+/************************************************************************************/
+
+class Temp
+{
+	private:
+	static unsigned int n;
+	static unsigned int sum;
+
+	public:
+
+	Temp()
+	{
+		n++;
+		sum+=n;
+	}
+
+    static void reset()
+	{
+		n=0;sum=0;
+	}
+
+    static int getSum()
+	{
+		return sum;
+	}
+};
+
+unsigned int Temp::n=0;
+unsigned int Temp::sum=0;
+
+unsigned int sum1(unsigned int num)
+{
+	Temp::reset();
+	Temp *a=new Temp[num];
+	delete []a;
+	a=NULL;
+
+	return Temp::getSum();
+}
+
+int main()
+{
+	cout<<sum1(5);
+}
