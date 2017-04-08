@@ -17,30 +17,30 @@ void FindNumber(vector<int> &nums, int &index1, int &index2)
 	left=0;
 	right=len-1;
 
-    while(left<right)
-    {
-        if(nums[left] +nums[right] > sum)
-            right--;
-        else if(nums[left] +nums[right] == sum)
-        {
-            index1 = left;
-            index2 = right;
-            return;
-        }
-        else if(nums[left] +nums[right] < sum)
-        {
-            left++;
-            if(nums[left] +nums[right] > sum)
-            {
-                index1 = left -1;
-                index2 = right;
-                return;
-            }
-        }
-    }
-    index1 = left;
-    index2 = right;
-    return;
+    	while(left<right)
+    	{
+        	if(nums[left] +nums[right] > sum)
+            		right--;
+        	else if(nums[left] +nums[right] == sum)
+        	{
+            		index1 = left;
+            		index2 = right;
+            		return;
+        	}
+        	else if(nums[left] +nums[right] < sum)
+        	{
+            		left++;
+            		if(nums[left] +nums[right] > sum)
+            		{
+                		index1 = left -1;
+                		index2 = right;
+                		return;
+            		}
+        	}
+    	}
+    	index1 = left;
+    	index2 = right;
+    	return;
 }
 
 int main()
