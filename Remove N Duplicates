@@ -1,0 +1,61 @@
+/****************************************************************************************/
+Write a function to remove all values from an integer array which appear exactly n 
+times and returns an array of the remaining values sorted in ascending order
+Example: 
+Given: n=3, integer array ={4,4,4,3,2,1,1}
+Returns: {1,1,2,3}
+/****************************************************************************************/
+
+using namespace std;
+
+vector<int> removeDuplicates(vector<int> &nums, int n)
+{
+	int len=nums.size();
+	map<int, int> m;
+	vector<int>::iterator it;
+
+	sort(nums.begin(), nums.end());
+
+	for(int i=0; i<len; i++)
+	{
+		if(m.end()!=m.find(nums[i]))
+			m[nums[i]]++;
+		else
+			m.insert(pair<int, int>(nums[i], 1));
+	}
+	for(int i=0; i<len; i++)
+	{
+		if(m[nums[i]]==n)
+			cout<<nums[i]<<",";
+	}
+	cout<<endl;
+	for(it=nums.begin();it!=nums.end();)
+    {
+        if(m[*it] ==n)
+        {
+            it=nums.erase(it);
+            len--;
+        }
+                //删除元素，返回值指向已删除元素的下一个位置
+         else
+             ++it;    //指向下一个位置
+     }
+    for(int i=0; i<len; i++)
+	{
+        cout<<nums[i]<<",";
+	}
+	cout<<endl;
+}
+
+int main()
+{
+    vector<int> nums;
+    nums.push_back(4);
+    nums.push_back(4);
+    nums.push_back(4);
+    nums.push_back(3);
+    nums.push_back(2);
+    nums.push_back(1);
+    nums.push_back(1);
+    removeDuplicates(nums, 3);
+}
