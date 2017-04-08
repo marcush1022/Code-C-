@@ -6,14 +6,14 @@ Return: 1
 
 int findSecondMost(vector<int> &nums)
 {
-    if(nums.size()==0)
-        return -1;
+    	if(nums.size()==0)
+        	return -1;
 	int len=nums.size();
 	map<int, int> m;
 	vector<int>::iterator it;
 	vector<int>::iterator itmax;
 	int maxCount=0;
-    int secondMax;
+    	int secondMax;
 
 	for(int i=0; i<len; i++)
 	{
@@ -24,40 +24,40 @@ int findSecondMost(vector<int> &nums)
 	}
 
 	for(it=nums.begin();it!=nums.end();it++)
-    {
-        if(m[*it]>maxCount)
-            maxCount=m[*it];
-    }
-    cout<<"First most Count="<<maxCount<<endl;
+    	{
+        	if(m[*it]>maxCount)
+            		maxCount=m[*it];
+    	}
+    	cout<<"First most Count="<<maxCount<<endl;
 
-    for(it=nums.begin();it!=nums.end();)
-    {
-        if(m[*it] ==maxCount)
-        {
-            it=nums.erase(it);
-            len--;
-        }
-         else
-             ++it;
-     }
-     cout<<"First most Deleted"<<endl;
-    for(int i=0; i<len; i++)
+    	for(it=nums.begin();it!=nums.end();)
+    	{
+        	if(m[*it] ==maxCount)
+        	{
+            		it=nums.erase(it);
+            		len--;
+        	}
+         	else
+             		++it;
+     	}
+     	cout<<"First most Deleted"<<endl;
+    	for(int i=0; i<len; i++)
 	{
-        cout<<nums[i]<<",";
+        	cout<<nums[i]<<",";
 	}
-    cout<<endl;
-    maxCount=0;
-    for(it=nums.begin();it!=nums.end();it++)
-    {
-        if(m[*it]>maxCount)
-            maxCount=m[*it];
-    }
-    for(it=nums.begin();it!=nums.end();it++)
-    {
-        if(m[*it] ==maxCount)
-           secondMax=(int)*it;
-     }
-     return secondMax;
+    	cout<<endl;
+    	maxCount=0;
+    	for(it=nums.begin();it!=nums.end();it++)
+    	{
+        	if(m[*it]>maxCount)
+            		maxCount=m[*it];
+    	}
+    	for(it=nums.begin();it!=nums.end();it++)
+    	{
+        	if(m[*it] ==maxCount)
+           		secondMax=(int)*it;
+     	}
+     	return secondMax;
 }
 
 int main()
