@@ -24,7 +24,7 @@ bool check(int threshold, int rowNum, int colNum, int row, int col, bool* visite
 {
 	if(row<rowNum && col<colNum && row>=0 && col>=0 && (getSum(row)+getSum(col) <= threshold) && !visited[row*colNum+col])
 		return true;
-    return false;
+    	return false;
 }
 
 //get count of moving
