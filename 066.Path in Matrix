@@ -1,0 +1,72 @@
+/********************************************************************************************************************/
+Judge there is a path in a matrix. Once a element in the matrix is visited, it cannot be visited again.
+Example: Input: "ABCESFCSADEE", "BCCED"
+Output: "true"
+/********************************************************************************************************************/
+
+bool getHasPath(char* matrix, int row, int col, int rowNum, int colNum,  char *str, int &pathLength, bool* visited)
+{
+	if(str[pathLength]=='\0')
+		return true;
+
+    bool hasPath=false;
+	if(row<rowNum && col<colNum && row>=0 && col>=0 && matrix[row*colNum+col]==str[pathLength] && !visited[row*colNum+col])
+	{
+		pathLength++;
+		visited[row*colNum+colNum]=true;
+
+		hasPath=getHasPath(matrix, row, col-1, rowNum, colNum, str, pathLength, visited)
+				|| getHasPath(matrix, row-1, col, rowNum, colNum, str, pathLength, visited)
+				|| getHasPath(matrix, row+1, col, rowNum, colNum, str, pathLength, visited)
+				|| getHasPath(matrix, row, col+1, rowNum, colNum, str, pathLength, visited);
+
+		if(!hasPath)
+		{
+			pathLength--;
+			visited[row*colNum+colNum]=false;
+		}
+	}
+
+	return hasPath;
+}
+
+
+bool hasPath(char *matrix, int rowNum, int colNum, char* str)
+{
+	if(matrix==NULL || rowNum==0 || colNum==0 || str==NULL)
+		return false;
+
+	bool *visited=new bool[rowNum * colNum];
+
+	memset(visited, 0, rowNum*colNum);
+
+	int pathLength=0;
+
+	for(int row=0; row<rowNum; row++)
+	{
+		for(int col=0; col<colNum; col++)
+		{
+			if(getHasPath(matrix, row, col, rowNum, colNum, str, pathLength, visited))
+			{
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+
+
+int main()
+{
+	char matrix[] = "ABCESFCSADEE";
+	char* str = "ABCB";
+	cout<<hasPath((char*)matrix, 3, 4, str);
+}
+
+
+
+
+
+
