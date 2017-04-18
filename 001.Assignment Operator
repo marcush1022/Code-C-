@@ -80,12 +80,12 @@ int main()
 	// 赋值给自己
 	//str1=str1;
 
-  //连续赋值
+  	//连续赋值
 	str3=str2=str1;
 
-    cout<<"str2= ";
-    str2.print();
-    cout<<endl;
-    cout<<"str3= ";
+    	cout<<"str2= ";
+    	str2.print();
+    	cout<<endl;
+    	cout<<"str3= ";
 	str3.print();
 }
