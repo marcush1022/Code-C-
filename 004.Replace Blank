@@ -1,23 +1,29 @@
-
-const int N=10;
+/*************************************************************************************/
+Replace all of the ' ' in a string with '%20'.
+Example: Input: "hello world ",
+Output: "hello%20world%20".
+/*************************************************************************************/
 
 class Solution {
 public:
-    void RemoveBlank(char str[], int length)
+    void ReplaceBlank(char str[], int length)
 	{
-		int i;
+		int i=0;
 		if(length<0 || str==NULL)
 			return ;
 		int originLength=0, newLength=0, blankNum=0;
 		while(str[i]!='\0')
 		{
       //the origin length of the stirng
-			originLength++;    
+			originLength++;
 			if(str[i]==' ')
 				blankNum++;
 			i++;
 		}
 
+        cout<<"blankNum= "<<blankNum<<endl;
+        cout<<"originLength= "<<originLength<<endl;
+        cout<<endl;
     //length of the string after replaced
 		newLength=originLength+blankNum*2;
 
@@ -27,7 +33,7 @@ public:
 		int leftPoint=originLength;
 		int rightPoint=newLength;
 
-		while(leftPoint>=0 && leftPoint<rightPoint)
+		while(leftPoint>=0)
 		{
 			if(str[leftPoint]==' ')
 			{
@@ -47,11 +53,7 @@ int main()
 {
 	Solution s;
 	int length=100;
-	char str[length]="    ";
-	s.RemoveBlank(str,length);
+	char str[length]=" he llo wo rld gt";
+	s.ReplaceBlank(str,length);
 	cout<<str;
 }
-
-//O(n)
-
-
