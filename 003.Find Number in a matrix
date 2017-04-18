@@ -1,44 +1,26 @@
-//Find a number in a matrix.
-//Every rows and columes are in an increase order in the maxtrix
-//Return true or false as a represent find it or not
-
-#include <iostream>
-#include <cstdio>
-#include <fstream>
-#include <algorithm>
-#include <cmath>
-#include <deque>
-#include <vector>
-#include <queue>
-#include <string>
-#include <cstring>
-#include <map>
-#include <stack>
-#include <set>
-using namespace std;
+/***************************************************************************/
+Find a number in a matrix.
+Every rows and columes are in an ascend order in the maxtrix
+Return true or false as a represent find it or not
+/***************************************************************************/
 
 class Solution{
 	public:
-		int FindNum(int* a, int row, int col,int num)
+	bool FindNum(int* a, int rowNum, int colNum, int target)
+	{
+		if(a==NULL || rowNum<=0 || colNum<=0)
+			return false;
+		int i=0,j=colNum-1;
+		while(i<rowNum && j>=0)
 		{
-		    int flag=0;
-			if(a==NULL || row<=0 || col<=0)
-				flag=0;
-			int i=0,j=row-1;
-			while(i<row && j>=0)
-			{
-				if(a[row*i+j]==num)
-				{
-				    cout<<"row*i= "<<row*i<<" j= "<<j<<endl;
-					flag= 1;
-					break;
-				}
-				else if(a[row*i+j]>num)
-					j--;
-				else
-					i++;
+			if(a[rowNum*i+j]==target)
+				retrun true;
+			else if(a[rowNum*i+j]>target)
+				j--;
+			else
+				i++;
 			}
-			return flag;
+			return false;
 		}
 };
 
@@ -47,6 +29,6 @@ int main()
 	int matrix[][4] = {{1, 2, 8, 9}, {2, 4, 9, 12}, {4, 7, 10, 13}, {6, 8, 11, 15}};
 	Solution s;
 	cout<<s.FindNum((int*)matrix,4,4,15);
-    return 0;
+    	return 0;
 }
 
