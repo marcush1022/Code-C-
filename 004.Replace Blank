@@ -6,7 +6,7 @@ Output: "hello%20world%20".
 
 class Solution {
 public:
-    void ReplaceBlank(char str[], int length)
+    	void ReplaceBlank(char str[], int length)
 	{
 		int i=0;
 		if(length<0 || str==NULL)
@@ -14,24 +14,20 @@ public:
 		int originLength=0, newLength=0, blankNum=0;
 		while(str[i]!='\0')
 		{
-      //the origin length of the stirng
 			originLength++;
 			if(str[i]==' ')
 				blankNum++;
 			i++;
 		}
 
-        cout<<"blankNum= "<<blankNum<<endl;
-        cout<<"originLength= "<<originLength<<endl;
-        cout<<endl;
-    //length of the string after replaced
 		newLength=originLength+blankNum*2;
 
+		//overflow
 		if(newLength>length)
-			return;					//overflow
+			return;					
 
-		int leftPoint=originLength;
-		int rightPoint=newLength;
+		int leftPoint=originLength;  //include the '\0'
+		int rightPoint=newLength;  //include the '\0'
 
 		while(leftPoint>=0)
 		{
