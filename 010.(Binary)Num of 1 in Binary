@@ -1,8 +1,10 @@
 /*********************************************************************************/
-给一个整数（可能为负数）n，n的binary形式中1的个数是多少，举例5，return 2
+Count the number of '1' in a integer(maybe negative).
+Example: input: 5
+Output: 2
 /*********************************************************************************/
 
-class Solution
+class Solution1
 {
 	public:
 	int numberOfOne(int n)
@@ -20,10 +22,25 @@ class Solution
 	}
 };
 
+class Solution2
+{
+	public:
+	int numberOfOne(int n)
+	{
+		int count=0;
+		while(n)
+		{
+			count++;
+			n=(n-1)&n;
+		}
+		return count;
+	}
+};
+
 
 int main()
 {
-	Solution s;
+	Solution1 s1;
 	cout<<s.numberOfOne(5);
 }
 
