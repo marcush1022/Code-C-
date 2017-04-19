@@ -1,0 +1,53 @@
+/*************************************************************************************/
+Sort a array of age.
+Range of age: 0~100
+/*************************************************************************************/
+
+class Solution{
+    public:
+	int sortAge(vector<int> &age)
+	{
+		int len=age.size();
+		if(len==0)
+			return 0;
+        cout<<"len= "<<len<<endl;
+		int index=0, maxAge=100;
+		int countAge[maxAge+1];
+
+		for(int i=0; i<=maxAge; i++)
+			countAge[i]=0;
+
+		for(int i=0; i<len; i++)
+		{
+			if(age[i]>0 && age[i]<=maxAge)
+                countAge[age[i]]++;
+		}
+
+		for(int i=0; i<=maxAge; i++)
+		{
+			for(int j=0; j<countAge[i]; j++)
+				age[index++]=i;
+		}
+        return index;
+	}
+};
+
+int main()
+{
+	vector<int> age;
+	int length;
+	age.push_back(25);
+	age.push_back(25);
+	age.push_back(20);
+	age.push_back(25);
+	age.push_back(35);
+	age.push_back(15);
+	age.push_back(35);
+	age.push_back(5);
+	age.push_back(215);
+	age.push_back(15);
+	Solution s;
+	length=s.sortAge(age);
+	for(int i=0; i<length; i++)
+		cout<<age[i]<<",";
+}
