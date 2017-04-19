@@ -1,0 +1,29 @@
+/*********************************************************************************/
+给一个整数（可能为负数）n，n的binary形式中1的个数是多少，举例5，return 2
+/*********************************************************************************/
+
+class Solution
+{
+	public:
+	int numberOfOne(int n)
+	{
+		int count=0;
+		int flag=1;
+		while(flag)
+		{
+			if(n & flag)
+				count++;
+			flag=flag<<1;
+		}
+
+		return count;
+	}
+};
+
+
+int main()
+{
+	Solution s;
+	cout<<s.numberOfOne(5);
+}
+
