@@ -16,14 +16,14 @@ class Solution
 		int left=0, right=len-1;
 		int mid;
 
-        while(nums[right]==nums[right-1] && left<right)
-                right--;
-        while(nums[left]==nums[left+1] && left<right)
-                left++;
+        	while(nums[right]==nums[right-1] && left<right)
+                	right--;
+        	while(nums[left]==nums[left+1] && left<right)
+                	left++;
 
-        cout<<"left= "<<left<<", right= "<<right<<endl;
-        if(left==right)
-            return nums[right];
+        	cout<<"left= "<<left<<", right= "<<right<<endl;
+        	if(left==right)
+            		return nums[right];
 
 
 		while((right-left)!=1)
