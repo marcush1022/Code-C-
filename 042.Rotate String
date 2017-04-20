@@ -1,6 +1,6 @@
 /*************************************************************************/
 Input a sentence, and do left rotate.
-Example: Input: "abcdefg"
+Example: Input: "abcdefg", 2
 Output: "cdefgab"
 /*************************************************************************/
 
@@ -38,7 +38,7 @@ char* leftRotateWords(char *data, int n)
 	start1=data;
 	end1=data+n-1;
 	start2=data+n;
-	end2=start1+length-1;
+	end2=end;
 	getReverse(start1, end1);
 	getReverse(start2, end2);
 
