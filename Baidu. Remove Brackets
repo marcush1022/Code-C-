@@ -1,0 +1,62 @@
+/*****************************************************************/
+Remove all brackets in an string except the begin one and the end one.
+Example: Input: (1,(2,3),(4,5,6))
+Output: (1,2,3,4,5,6)
+/*****************************************************************/
+
+class Solution4
+{
+	public:
+	bool judgeBrackets(string &str)
+	{
+
+		int len=str.length();
+		if(len==0)
+			return false;
+		int left=0, right=0;
+		bool flag=1;
+		for(int i=0; i<len; i++)
+		{
+			if(str[i]=='(')
+			{
+				flag=0;
+				left++;
+			}
+			if(str[i]==')')
+			{
+				flag=1;
+				right++;
+			}
+		}
+
+		if(flag && left==right)
+			return true;
+		else
+			return false;
+	}
+
+	void removeBrackets(string &str, string &ret)
+	{
+	    if(!judgeBrackets(str))
+            return ;
+        int len=str.length();
+        for(int i=0; i<len; i++)
+        {
+            if((str[i]=='(' && i!=0) || (str[i]==')' && i!=len-1))
+                continue;
+            else
+                ret.push_back(str[i]);
+        }
+	}
+};
+
+int main()
+{
+	Solution4 s;
+	string str="(1,(2,3,(4,(5,6)))";
+	string ret;
+	s.removeBrackets(str, ret);
+	cout<<"length="<<ret.length()<<endl;
+    for(int i=0; i<ret.length(); i++)
+        cout<<ret[i];
+}
