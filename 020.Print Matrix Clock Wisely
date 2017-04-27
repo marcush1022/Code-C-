@@ -1,0 +1,74 @@
+/********************************************************************/
+Print the elements of a matrix in a clock wisely order.
+/********************************************************************/
+
+class Solution
+{
+	public:
+    void printNum(int num)
+    {
+        cout<<num<<",";
+    }
+
+	void printMatrixCycle(int **nums, int colNum, int rowNum, int start)
+	{
+		int endX=colNum-1-start;
+		int endY=rowNum-1-start;
+    
+    //Print left to right
+		for(int i=start; i<=endX; i++)
+			printNum(nums[start][i]);
+    
+    //Print up to down
+		if(start<endY)
+		{
+			for(int i=start+1; i<=endY; i++)
+				printNum(nums[i][endX]);
+		}
+
+    //Print right to left
+		if(start<endX && start<endY)
+		{
+			for(int i=endX-1; i>=start; i--)
+				printNum(nums[endY][i]);
+		}
+
+     //Print down to up
+		if(start<endX && start<endY-1)
+		{
+			for(int i=endY-1; i>=start+1; i--)
+				printNum(nums[i][start]);
+		}
+	}
+
+	void printMatrix(int **nums, int colNum, int rowNum)
+	{
+		if(nums==NULL || colNum<0 || rowNum<0)
+			return ;
+		int start=0;
+		while(start*2<colNum && start*2<rowNum)
+		{
+			printMatrixCycle(nums, colNum, rowNum, start);
+			start++;
+		}
+	}
+
+};
+
+int main()
+{
+	Solution s;
+	int colNum=4, rowNum=4;
+	int **nums=new int*[rowNum];
+	for(int i=0; i<rowNum; i++)
+	{
+		nums[i]=new int[colNum];
+		for(int j=0; j<colNum; j++)
+			nums[i][j]=i*colNum+j+1;
+	}
+
+	s.printMatrix(nums, colNum, rowNum);
+	return 0;
+}
+
+
