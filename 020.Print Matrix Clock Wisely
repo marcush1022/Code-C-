@@ -5,35 +5,35 @@ Print the elements of a matrix in a clock wisely order.
 class Solution
 {
 	public:
-    void printNum(int num)
-    {
-        cout<<num<<",";
-    }
+    	void printNum(int num)
+    	{
+        	cout<<num<<",";
+    	}
 
 	void printMatrixCycle(int **nums, int colNum, int rowNum, int start)
 	{
 		int endX=colNum-1-start;
 		int endY=rowNum-1-start;
     
-    //Print left to right
+    		//Print left to right
 		for(int i=start; i<=endX; i++)
 			printNum(nums[start][i]);
     
-    //Print up to down
+    		//Print up to down
 		if(start<endY)
 		{
 			for(int i=start+1; i<=endY; i++)
 				printNum(nums[i][endX]);
 		}
 
-    //Print right to left
+    		//Print right to left
 		if(start<endX && start<endY)
 		{
 			for(int i=endX-1; i>=start; i--)
 				printNum(nums[endY][i]);
 		}
 
-     //Print down to up
+    	 	//Print down to up
 		if(start<endX && start<endY-1)
 		{
 			for(int i=endY-1; i>=start+1; i--)
