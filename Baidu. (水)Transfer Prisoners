@@ -1,0 +1,43 @@
+/******************************************************************************/
+Transfer some prisoners of place C to place D.
+There are n prisoners in place C, and c prisoners need to be transfered.
+c prisoners must in consequence numbers, and the sum of the numbers should no
+more than t;
+/******************************************************************************/
+
+class Solution
+{
+	public:
+	int selectSubsequence(vector<int> &nums, int c, int t)
+	{
+		int len=nums.size();
+		if(len==0)
+			return 0;
+		int left, right;
+		int count=0, sum=0;
+
+		for(left=0, right=left+c-1; right<len; right++,left++)
+		{
+		    sum=0;
+			for(int i=left; i<=right; i++)
+				sum+=nums[i];
+			if(sum<=t)
+				count++;
+		}
+
+		return count;
+	}
+};
+
+int main()
+{
+	Solution s;
+	vector<int> nums;
+	nums.push_back(4);
+	nums.push_back(1);
+	nums.push_back(3);
+	nums.push_back(5);
+	nums.push_back(2);
+	nums.push_back(7);
+	cout<<s.selectSubsequence(nums, 3, 9);
+}
