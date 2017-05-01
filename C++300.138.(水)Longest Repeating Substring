@@ -1,0 +1,50 @@
+/****************************************************************************/
+Find longest substring of string str. The substring is formed by same 
+charaters.
+Example: Input "adcccdeffffffdaswssw"
+Output: "ffffff", 6
+/****************************************************************************/
+
+class Solution
+{
+	public:
+	void getLongSubstring(string str, string &ret, int &retLength)
+	{
+		int len=str.length();
+		if(len==0)
+			return ;
+		int left=0, right=0;
+		int maxLeft=0, maxLength=0;
+
+		for(left=0; left<len; left++)
+		{
+			right=left;
+			while(str[right]==str[left])
+				right++;
+			right--;
+			int count=right-left+1;
+			if(count>maxLength)
+			{
+				maxLength=count;
+				maxLeft=left;
+			}
+		}
+
+		ret=str.substr(maxLeft, maxLength);
+		retLength=maxLength;
+	}
+};
+
+int main()
+{
+	Solution s;
+	//string str="abccccdsssssssesaaaa";
+	string str="asde";
+	int length=0;
+	string res="";
+	s.getLongSubstring(str, res, length);
+	cout<<"max length of substring= "<<length<<endl;
+	for(int i=0; i<res.length(); i++)
+        cout<<res[i]<<",";
+	return 0;
+}
