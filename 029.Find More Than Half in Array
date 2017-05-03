@@ -8,19 +8,19 @@ return 2
 class Solution6
 {
 	public:
-    bool checkMoreThanHalf(vector<int> &nums, int num)
-    {
-        bool flag=true;
-        int count=0;
-        for(int i=0; i<nums.size(); i++)
-        {
-            if(nums[i]==num)
-                count++;
-        }
-        if(count*2<=nums.size())
-            flag=false;
-        return flag;
-    }
+    	bool checkMoreThanHalf(vector<int> &nums, int num)
+    	{
+        	bool flag=true;
+        	int count=0;
+        	for(int i=0; i<nums.size(); i++)
+        	{
+            		if(nums[i]==num)
+                	count++;
+        	}
+        	if(count*2<=nums.size())
+            		flag=false;
+        	return flag;
+    	}
 
 	int doPartition(vector<int> &nums, int left, int right)
 	{
@@ -50,7 +50,7 @@ class Solution6
 				left=ans+1;
 		}
 		if(!checkMoreThanHalf(nums, nums[pos]))
-            return -1;
+            		return -1;
 		return nums[pos];
 	}
 };
