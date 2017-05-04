@@ -1,7 +1,4 @@
 
-class A;
-A* Array[2];
-
 class A
 {
 	public:
@@ -11,6 +8,8 @@ class A
 	}
 
 };
+
+A* Array[2];
 
 class B: public A
 {
