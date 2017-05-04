@@ -5,20 +5,20 @@ Calculate the sum of 1+2+3...+n, no use of *, /, while, for, if, else,(A?B:C) et
 class Temp
 {
 	private:
-	static unsigned int n;
+	static unsigned int N;
 	static unsigned int sum;
 
 	public:
 
 	Temp()
 	{
-		n++;
-		sum+=n;
+		N++;
+		sum+=N;
 	}
 
     	static void reset()
 	{
-		n=0;sum=0;
+		N=0;sum=0;
 	}
 
     	static int getSum()
@@ -27,7 +27,7 @@ class Temp
 	}
 };
 
-unsigned int Temp::n=0;
+unsigned int Temp::N=0;
 unsigned int Temp::sum=0;
 
 unsigned int sum1(unsigned int num)
