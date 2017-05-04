@@ -1,0 +1,78 @@
+/*******************************************************************/
+There is a loop in a list, find the entry of the loop.
+/*******************************************************************/
+
+ struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+
+class Solution3
+{
+	public:
+	ListNode *getMeetNode(ListNode *head)
+	{
+		if(head==NULL)
+			return head;
+		ListNode *fast, *slow;
+		fast=head;
+		slow=head;
+		while(1)
+		{
+			if(fast)
+				fast=fast->next;
+			else
+				return NULL;
+			if(slow)
+				slow=slow->next;
+			else
+				return NULL;
+			if(fast)
+				fast=fast->next;
+			else
+				return NULL;
+			if(fast==slow)
+				return fast;
+		}
+	}
+
+	ListNode *getLoopEntry(ListNode *head)
+	{
+		ListNode *meetNode=getMeetNode(head);
+		if(meetNode==NULL)
+			return NULL;
+
+		int loopNodeNum=1;
+		ListNode *fast=meetNode;
+		while(fast->next!=meetNode)
+		{
+			fast=fast->next;
+			loopNodeNum++;
+		}
+
+		fast=head;
+		for(int i=0; i<loopNodeNum; i++)
+			fast=fast->next;
+		ListNode *slow=head;
+		while(slow!=fast)
+		{
+			slow=slow->next;
+			fast=fast->next;
+		}
+
+		return fast;
+	}
+};
+int main()
+{
+	Solution3 s;
+	ListNode *head=new ListNode(1);
+	head->next=new ListNode(2);
+	head->next->next=new ListNode(3);
+	head->next->next->next=new ListNode(4);
+	head->next->next->next->next=head->next->next;
+	ListNode *ret=s.getLoopEntry(head);
+	cout<<ret->val;
+	return 0;
+}
