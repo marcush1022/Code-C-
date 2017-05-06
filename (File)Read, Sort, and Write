@@ -1,0 +1,83 @@
+/*************************************************************************************/
+Read a integer array in a file, sort the array and write the result in another file.
+/*************************************************************************************/
+
+class Solution
+{
+	public:
+	int doPartition(vector<int> &data, int left, int right)
+	{
+		int val=data[right];
+		for(int i=left; i<right; i++)
+		{
+			if(data[i]<val)
+				std::swap(data[left++], data[i]);
+		}
+		std::swap(data[left], data[right]);
+		return left;
+	}
+
+	void quickSort(vector<int> &data, int left, int right)
+	{
+		if(left<right)
+		{
+			int pos=doPartition(data, left, right);
+			quickSort(data, left, pos-1);
+			quickSort(data, pos+1, right);
+		}
+	}
+
+	void sortData(vector<int> &data)
+	{
+		int len=data.size();
+		int left=0, right=len-1;
+
+		quickSort(data, left, right);
+	}
+
+	void dataProcess()
+	{
+		vector<int> data;
+		ifstream in("e:\data.txt");
+		if(!in)
+		{
+			cout<<"READ ERROR!"<<endl;
+			return ;
+		}
+		int tmp;
+		while(!in.eof())
+		{
+			in>>tmp;
+			data.push_back(tmp);
+		}
+		cout<<"READ SUCESS!"<<endl;
+
+		in.close();
+
+		for(int i=0; i<data.size(); i++)
+			cout<<data[i]<<" ";
+		cout<<endl;
+
+		sortData(data);
+
+		ofstream out("d:\\ress.txt");
+
+		if(!out)
+		{
+			cout<<"OUT ERROR!"<<endl;
+			return ;
+		}
+
+		for(int i=0; i<data.size(); i++)
+			out<<data[i]<<" ";
+        cout<<"WRITE SUCESS!"<<endl;
+	}
+};
+
+int main()
+{
+	Solution s;
+	s.dataProcess();
+	return 0;
+}
+
