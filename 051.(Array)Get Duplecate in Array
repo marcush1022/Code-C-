@@ -1,0 +1,32 @@
+/*******************************************************************************/
+长度为n数组的数组所有数字都在范围0~n-1范围内，某些数字重复。
+找出其中任意重复的数字。
+
+Forget about the hash.
+/*******************************************************************************/
+
+class Solution {
+public:
+    int getDuplicateNumber(vector<int> &nums)
+	{
+		int len=nums.size();
+		if(len==0)
+			return -1;
+
+		for(int i=0; i<len; i++)
+			if(nums[i]<0 || nums[i]>len-1)
+				return -1;
+		for(int i=0; i<len; i++)
+		{
+			while(nums[i]!=i)
+			{
+				if(nums[i]==nums[nums[i]])
+					return nums[i];
+				int tmp=nums[i];
+				nums[i]=nums[tmp];
+				nums[tmp]=tmp;
+			}
+		}
+	}
+};
+
