@@ -1,0 +1,29 @@
+/**********************************************************************************/
+Find the nth number of a fibonacci array, do not use recursive.
+/**********************************************************************************/
+
+class Solution
+{
+	public:
+	int fibonacci(int n)
+	{
+		int fibOne=0;
+		int fibTwo=1;
+		int fibN=0;
+		
+		for(int i=0; i<=n; i++)
+		{
+			fibN=fibOne+fibTwo;
+			
+			fibOne=fibTwo;
+			fibTwo=fibN;
+		}
+		return fibN;
+	}
+};
+
+int main()
+{
+	Solution s;
+	cout<<s.fibonacci(10);
+}
