@@ -1,0 +1,26 @@
+/**********************************************************************/
+Find 2th Largest Number in a array.
+/**********************************************************************/
+
+class Solution {
+public:
+    int get2thLargestNumber(vector<int> &num)
+	{
+		int len=num.size();
+		if(len==0)
+			return -1;
+		int fstMax=num[0], secMax=INT_MIN;
+
+		for(int i=1; i<len; i++)
+		{
+			if(num[i]>fstMax)
+			{
+				secMax=fstMax;
+				fstMax=num[i];
+			}
+			else if(num[i]>secMax)
+				secMax=num[i];
+		}
+		return secMax;
+	}
+};
