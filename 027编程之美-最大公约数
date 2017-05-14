@@ -1,0 +1,55 @@
+/*******************************************************************************/
+Get the greatest common divisor of two integers. The integers may be really large.
+
+I. 
+/*******************************************************************************/
+class Solution1
+{
+	public:
+	int greatestCommonDivisor(int x, int y)
+	{
+		if(x<y)
+			return greatestCommonDivisor(y, x);
+		if(y==0)
+			return x;
+		else
+			return greatestCommonDivisor(x-y, y);
+	}
+};
+
+II. 降低了减法的迭代次数
+/*******************************************************************************/
+class Solution2
+{
+	public:
+	bool isEven(int n)
+	{
+		return (n%2==0);
+	}
+
+	int greatestCommonDivisor(int x, int y)
+	{
+		if(x<y)
+			return greatestCommonDivisor(y, x);
+		if(y==0)
+			return x;
+		else
+		{
+			if(isEven(x))
+			{
+				if(isEven(y))
+					return (greatestCommonDivisor(x>>1, y>>1)<<1);
+				else
+					return greatestCommonDivisor(x>>1, y);
+			}
+			else
+			{
+				if(isEven(y))
+					return greatestCommonDivisor(x, y>>1);
+				else
+					return greatestCommonDivisor(x-y, y);
+			}
+		}
+	}
+};
+
