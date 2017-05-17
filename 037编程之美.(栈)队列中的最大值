@@ -1,0 +1,62 @@
+/********************************************************************************/
+队列中的操作包括：
+EnQueue(x): 将x加入队列
+DeQueue(): 删除队头元素
+MaxQueue(): 返回队列中的最大值
+/********************************************************************************/
+
+class MaxQueue
+{
+	stack<int> stk1;
+	stack<int> stk2;
+	stack<int> stkMax;
+	public:
+	void doReverse()
+	{
+		while(!stk1.empty())
+		{
+			stk2.push(stk1.top());
+			if(stkMax.empty() || stkMax.top()<stk1.top())
+				stkMax.push(stk1.top());
+			else
+				stkMax.push(stkMax.top());
+
+			stk1.pop();
+		}
+	}
+
+	void EnQueue(int x)
+	{
+		stk1.push(x);
+	}
+
+	int DeQueue()
+	{
+		int ret;
+		doReverse();
+		ret=stk2.top();
+		stk2.pop();
+		stkMax.pop();
+		return ret;
+	}
+
+	int MaxElement()
+	{
+		doReverse();
+		return stkMax.top();
+	}
+};
+
+int main()
+{
+	MaxQueue maxQue;
+	maxQue.EnQueue(4);
+	maxQue.EnQueue(3);
+	maxQue.EnQueue(1);
+	maxQue.EnQueue(2);
+	cout<<"1: "<<maxQue.MaxElement()<<endl;
+	maxQue.DeQueue();
+	cout<<"2: "<<maxQue.MaxElement()<<endl;
+	maxQue.EnQueue(6);
+	cout<<"3: "<<maxQue.MaxElement()<<endl;
+}
