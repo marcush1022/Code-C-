@@ -1,0 +1,270 @@
+/**************************************************************************************************************/
+排序的稳定性和复杂度
+
+不稳定：
+
+选择排序（selection sort）— O(n2)
+快速排序（quicksort）— O(nlogn) 平均时间, O(n2) 最坏情况; 对于大的、乱序串列一般认为是最快的已知排序
+堆排序 （heapsort）— O(nlogn)
+希尔排序 （shell sort）— O(nlogn)
+基数排序（radix sort）— O(n·k); 需要 O(n) 额外存储空间 （K为特征个数）
+
+稳定：
+
+插入排序（insertion sort）— O(n2)
+冒泡排序（bubble sort） — O(n2)
+归并排序 （merge sort）— O(n log n); 需要 O(n) 额外存储空间
+二叉树排序（Binary tree sort） — O(nlogn); 需要 O(n) 额外存储空间
+计数排序  (counting sort) — O(n+k); 需要 O(n+k) 额外存储空间，k为序列中Max-Min+1
+桶排序 （bucket sort）— O(n); 需要 O(k) 额外存储空间
+/**************************************************************************************************************/
+
+class Sort
+{
+	public:
+  
+/**************************************************************************************************************/
+插入排序: 遍历数组，遍历到i时，a0,a1...ai-1是已经排好序的，取出ai，从ai-1开始向前和每个比较大小，如果小于，则将此位置元素向后移动，
+继续先前比较，如果不小于，则放到正在比较的元素之后。可见相等元素比较是，原来靠后的还是拍在后边，所以插入排序是稳定的。
+
+当待排序的数据基本有序时，插入排序的效率比较高，只需要进行很少的数据移动。
+/**************************************************************************************************************/
+	void insertSort(vector<int> &nums)
+	{
+		int len=nums.size();
+		for(int i=1; i<len; i++)
+		{
+			int v=nums[i];
+			int j=i-1;
+			while(j>=0 && nums[j]>v)
+			{
+			    nums[j+1]=nums[j];
+			    j--;
+			}
+
+			nums[j+1]=v;
+		}
+	}
+  
+/**************************************************************************************************************/
+选择排序: 遍历数组，遍历到i时，a0,a1...ai-1是已经排好序的，然后从i到n选择出最小的，记录下位置，如果不是第i个，则和第i个元
+素交换。此时第i个元素可能会排到相等元素之后，造成排序的不稳定。
+/**************************************************************************************************************/
+	void selectionSort(vector<int> &nums)
+	{
+		for(int i=0; i<nums.size()-1; i++)
+		{
+			int pos=i;
+			for(int j=i+1; j<nums.size(); j++)
+				if(nums[pos]>nums[j])
+					pos=j;
+			if(pos!=i)
+				swap(nums[pos], nums[i]);
+		}
+	}
+
+/**************************************************************************************************************/
+冒泡排序: 冒泡排序的名字很形象，实际实现是相邻两节点进行比较，大的向后移一个，经过第一轮两两比较和移动，最大的元素移动到了
+最后，第二轮次大的位于倒数第二个，依次进行。这是最基本的冒泡排序，还可以进行一些优化。
+优化一：如果某一轮两两比较中没有任何元素交换，这说明已经都排好序了，算法结束，可以使用一个Flag做标记，默认为false，如果发
+生交互则置为true，每轮结束时检测Flag，如果为true则继续，如果为false则返回。
+优化二：某一轮结束位置为j，但是这一轮的最后一次交换发生在lastSwap的位置，则lastSwap到j之间是排好序的，下一轮的结束点就不
+必是j--了，而直接到lastSwap即可
+/**************************************************************************************************************/
+	void bubbleSort(vector<int> &nums)
+	{
+		int lastSwap=0, len=nums.size();
+		for(int j=len-1; j>0; j=lastSwap)
+		{
+			lastSwap=0;
+			for(int i=0; i<len; i++)
+			{
+				if(nums[i]>nums[i+1])
+				{
+					swap(nums[i], nums[i+1]);
+					lastSwap=i;
+				}
+			}
+		}
+	}
+
+/**************************************************************************************************************/
+希尔排序: 希尔排序是对插入排序的优化，基于以下两个认识：
+1. 数据量较小时插入排序速度较快，因为n和n2差距很小；
+2. 数据基本有序时插入排序效率很高，因为比较和移动的数据量少。
+
+因此，希尔排序的基本思想是将需要排序的序列划分成为若干个较小的子序列，对子序列进行插入排序，通过则插入排序能够使得原来序列
+成为基本有序。这样通过对较小的序列进行插入排序，然后对基本有序的数列进行插入排序，能够提高插入排序算法的效率。
+希尔排序的划分子序列不是像归并排序那种的二分，而是采用的叫做增量的技术，例如有十个元素的数组进行希尔排序，首先选择增量为
+10/2=5，此时第1个元素和第（1+5）个元素配对成子序列使用插入排序进行排序，第2和（2+5）个元素组成子序列，完成后增量继续减
+半为2，此时第1个元素、第（1+2）、第（1+4）、第（1+6）、第（1+8）个元素组成子序列进行插入排序。这种增量选择方法的好处是
+可以使数组整体均匀有序，尽可能的减少比较和移动的次数，二分法中即使前一半数据有序，后一半中如果有比较小的数据，还是会造成
+大量的比较和移动，因此这种增量的方法和插入排序的配合更佳。
+
+希尔排序的时间复杂度和增量的选择策略有关，上述增量方法造成希尔排序的不稳定性。
+/**************************************************************************************************************/
+	void shellSort(vector<int> &nums)
+	{
+		int len=nums.size();
+		int d=len/2;
+		for(d; d>=1; d/=2)
+		{
+			for(int i=d; i<len; i++)
+			{
+				int j=i-d;
+				int tmp=nums[i];
+				while(j>=0 && nums[j]>tmp)
+				{
+					nums[j+d]=nums[j];
+					j-=d;
+				}
+				nums[j+d]=tmp;
+			}
+		}
+	}
+
+/**************************************************************************************************************/
+ 快速排序: 首先找到一个基准，下面程序以第一个元素作为基准（pivot），然后先从右向左搜索，如果发现比pivot小，则和pivot交换，
+ 然后从左向右搜索，如果发现比pivot大，则和pivot交换，一直到左边大于右边，此时pivot左边的都比它小，而右边的都比它大，此时
+ pivot的位置就是排好序后应该在的位置，此时pivot将数组划分为左右两部分，可以递归采用该方法进行。快排的交换使排序成为不稳定
+ 的。
+ /**************************************************************************************************************/
+	int doPartaition(vector<int> &nums, int left, int right)
+	{
+		int val=nums[right];
+		for(int i=left; i<right; i++)
+		{
+			if(nums[i]<val)
+				swap(nums[left++], nums[i]);
+		}
+		swap(nums[left], nums[right]);
+		return left;
+	}
+
+	void quickSort(vector<int> &nums, int left, int right)
+	{
+		if(left<right)
+		{
+		    int pos=doPartaition(nums, left, right);
+			quickSort(nums, left, pos-1);
+			quickSort(nums, pos+1, right);
+		}
+	}
+
+/**************************************************************************************************************/
+归并排序: 归并排序是采用分治法（Divide and Conquer）的一个非常典型的应用。首先考虑下如何将将二个有序数列合并。这个非常简单，
+只要从比较二个数列的第一个数，谁小就先取谁，取了后就在对应数列中删除这个数。然后再进行比较，如果有数列为空，那直接将另一个
+数列的数据依次取出即可。这需要将待排序序列中的所有记录扫描一遍，因此耗费O(n)时间，而由完全二叉树的深度可知，整个归并排序需
+要进行.logn.次，因此，总的时间复杂度为O(nlogn)。
+
+归并排序在归并过程中需 要与原始记录序列同样数量的存储空间存放归并结果，因此空间复杂度为O(n)。
+归并算法需要两两比较，不存在跳跃，因此归并排序是一种稳定的排序算法。
+/**************************************************************************************************************/
+	void doMerge(vector<int> &nums, int left, int mid, int right, vector<int> &tmp)
+	{
+		int m=mid, n=right;
+		int i=left, j=mid+1;
+		int k=0;
+
+		while(i<=m && j<=n)
+		{
+			if(nums[i]<=nums[j])
+				tmp[k++]=nums[i++];
+			else
+				tmp[k++]=nums[j++];
+		}
+		while(i<=m)
+			tmp[k++]=nums[i++];
+		while(j<=n)
+			tmp[k++]=nums[j++];
+
+		for(int i=0; i<k; i++)
+			nums[left+i]=tmp[i];
+	}
+
+	void mergeSort(vector<int> &nums, int left, int right, vector<int> &tmp)
+	{
+		if(left<right)
+		{
+			int mid=(left+right)/2;
+			mergeSort(nums, left, mid, tmp);
+			mergeSort(nums, mid+1, right, tmp);
+			doMerge(nums, left, mid, right, tmp);
+		}
+	}
+
+	void testInsertSort(vector<int> nums)
+    {
+        insertSort(nums);
+        cout<<"Insert: "<<endl;
+        for(int i=0; i<nums.size(); i++)
+            cout<<nums[i]<<" ";
+        cout<<endl;
+    }
+
+	void testSelectionSort(vector<int> nums)
+    {
+        selectionSort(nums);
+        cout<<"Selection: "<<endl;
+        for(int i=0; i<nums.size(); i++)
+            cout<<nums[i]<<" ";
+        cout<<endl;
+    }
+
+	void testBubbleSort(vector<int> nums)
+    {
+        bubbleSort(nums);
+        cout<<"bubbleSort: "<<endl;
+        for(int i=0; i<nums.size(); i++)
+            cout<<nums[i]<<" ";
+        cout<<endl;
+    }
+
+	void testshellSort(vector<int> nums)
+    {
+        shellSort(nums);
+        cout<<"shellSort: "<<endl;
+        for(int i=0; i<nums.size(); i++)
+            cout<<nums[i]<<" ";
+        cout<<endl;
+    }
+
+    void testQuickSort(vector<int> nums)
+    {
+        int left=0, right=nums.size();
+        quickSort(nums, left, right);
+        cout<<"Quick: "<<endl;
+        for(int i=0; i<nums.size(); i++)
+            cout<<nums[i]<<" ";
+        cout<<endl;
+    }
+
+	void testMergeSort(vector<int> nums)
+    {
+        int left=0, right=nums.size()-1;
+        vector<int> tmp(nums.size());
+        mergeSort(nums, left, right, tmp);
+        cout<<"mergeSort: "<<endl;
+        for(int i=0; i<nums.size(); i++)
+            cout<<nums[i]<<" ";
+        cout<<endl;
+    }
+};
+
+
+
+int main()
+{
+	Sort s;
+	vector<int> nums;
+	int data[]={5,2,4,6,1,3};
+	for(int i=0; i<6; i++)
+		nums.push_back(data[i]);
+	s.testInsertSort(nums);
+	s.testSelectionSort(nums);
+	s.testBubbleSort(nums);
+	s.testQuickSort(nums);
+	s.testMergeSort(nums);
+	s.testshellSort(nums);
+	return 0;
+}
