@@ -1,0 +1,58 @@
+
+class Student
+{
+	public:
+		Student() {}
+		Student(int);
+		virtual ~Student()
+		{
+		    cout<<"\nStudent desctructed!"<<endl;
+		}
+		virtual void display();
+	protected:
+		int stu;
+};
+
+Student::Student(int n)
+{
+	stu=n;
+}
+
+void Student::display()
+{
+	cout<<"stu:"<<stu<<endl;
+}
+
+class Graduate:public Student
+{
+	public:
+			Graduate() {}
+			Graduate(int, int);
+			void display();
+			~Graduate()
+			{
+			    cout<<"\nGraduate desctructed!"<<endl;
+			}
+	private:
+		int gra;
+};
+
+Graduate::Graduate(int n, int m)
+{
+	stu=n;
+	gra=m;
+}
+
+void Graduate::display()
+{
+	cout<<"stu:"<<stu<<" gra: "<<gra<<endl;
+}
+
+int main()
+{
+	Student *g=new Graduate(1,2);
+	g->display();
+
+	delete g;
+	return 0;
+}
