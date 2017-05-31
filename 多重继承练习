@@ -1,0 +1,141 @@
+
+class Person
+{
+	public:
+	Person(string na, char s, int a)
+	{
+		name=na;
+		sex=s;
+		age=a;
+	}
+	virtual void display()
+	{
+	    cout<<"Person"<<endl;
+	    cout<<"name= "<<name<<endl;
+	    cout<<"sex= "<<sex<<endl;
+	    cout<<"age= "<<age<<endl;
+	}
+	virtual ~Person()
+	{
+		cout<<"\nPerson Deleted!\n";
+	}
+	protected:
+	string name;
+	char sex;
+	int age;
+};
+
+class Teacher:virtual public Person
+{
+	public:
+	Teacher(string na, char s, int a, string t):Person(na, s, a)
+	{
+		title=t;
+	}
+	~Teacher()
+	{
+		cout<<"\nTeacher Deleted!\n";
+	}
+	void display()
+	{
+	    cout<<"Teacher Display\n";
+		cout<<"name= "<<name<<endl;
+		cout<<"sex= "<<sex<<endl;
+		cout<<"age= "<<age<<endl;
+		cout<<"title= "<<title<<endl;
+	}
+	protected:
+	string title;
+};
+
+class Student:virtual public Person
+{
+	public:
+	Student(string na, char s, int a, float sc):Person(na, s, a)
+	{
+		score=sc;
+	}
+	~Student()
+	{
+		cout<<"\nStudent Deleted!\n";
+	}
+	void display()
+	{
+	    cout<<"Student Display\n";
+		cout<<"name= "<<name<<endl;
+		cout<<"sex= "<<sex<<endl;
+		cout<<"age= "<<age<<endl;
+		cout<<"score= "<<score<<endl;
+	}
+	protected:
+	float score;
+};
+
+class Graduate:public Teacher, public Student
+{
+	public:
+	Graduate(string na, char s, int a, string t, float sc, float w):Person(na, s, a), Teacher(na, s, a, t), Student(na, s, a, sc)
+	{
+		wage=w;
+	}
+	~Graduate()
+	{
+		cout<<"\nGraduate Deleted!\n";
+	}
+	void display()
+	{
+	    cout<<"Graduate Display\n";
+		cout<<"name= "<<name<<endl;
+		cout<<"sex= "<<sex<<endl;
+		cout<<"age= "<<age<<endl;
+		cout<<"title= "<<title<<endl;
+		cout<<"score= "<<score<<endl;
+		cout<<"wage= "<<wage<<endl;
+	}
+	private:
+	float wage;
+};
+
+class Clone:public Person
+{
+	public:
+	Clone(string na, char s, int a, int num):Person(na, s, a)
+	{
+		number=num;
+	}
+	void display()
+	{
+		cout<<"\nClone Display\n";
+		cout<<"name= "<<name<<endl;
+		cout<<"sex= "<<sex<<endl;
+		cout<<"age= "<<age<<endl;
+		cout<<"number= "<<number<<endl;
+	}
+	~Clone()
+	{
+		cout<<"\nClone Deleted\n";
+	}
+	private:
+	int number;
+};
+
+
+int main()
+{
+	Graduate *p=new Graduate("Jack", 'm', 35, "boss", 1.02, 1200);
+	p->display();
+
+	Person *q=new Clone("Jason", 'm', 35, 13311);
+	q->display();
+
+	delete q;
+	q=NULL;
+
+	delete p;
+	p=NULL;
+
+	return 0;
+}
+
+
+
