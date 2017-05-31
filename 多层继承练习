@@ -1,0 +1,60 @@
+
+class Student
+{
+	public:
+	Student(int n, string na)
+	{
+		num=n;
+		name=na;
+	}
+	void display()
+	{
+		cout<<"num= "<<num<<", name= "<<name<<endl;
+	}
+	protected:
+	int num;
+	string name;
+};
+
+class Student1:public Student
+{
+	public:
+	Student1(int n, string na, int a):Student(n, na)
+	{
+		age=a;
+	}
+	void display()
+	{
+		cout<<"num= "<<num<<", name= "<<name<<", age="<<age<<endl;
+	}
+	protected:
+	int age;
+};
+
+class Student2:public Student1
+{
+	public:
+	Student2(int n, string na, int a, int s):Student1(n, na, a)
+	{
+		score=s;
+	}
+	void display()
+	{
+		cout<<"num= "<<num<<", name= "<<name<<", age= "<<age<<", score= "<<score<<endl;
+	}
+	private:
+	int score;
+};
+
+int main()
+{
+	Student2 stu(101, "LIII", 15, 89);
+	stu.display();
+	return 0;
+}
+
+
+
+
+
+
