@@ -25,6 +25,9 @@ class Person
 	int age;
 };
 
+//虚基类: 继承共同基类时只保留一份拷贝
+//作用: 不需要保留多份成员，避免二义性
+//并不是在声明基类时声明，而是在声明派生类时，指定继承方式
 class Teacher:virtual public Person
 {
 	public:
