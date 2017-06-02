@@ -1,0 +1,54 @@
+/*****************************************************************************/
+给定两个字符串s1，s2，判定s2能否被s1循环移位得到的字符串包含
+/*****************************************************************************/
+
+class Solution
+{
+	public:
+	bool rotateContain(char str[], char sub[])
+	{
+		int len=strlen(str);
+		for(int i=0; i<len; i++)
+		{
+			char tmp=str[0];
+			for(int j=0; j<len-1; j++)
+				str[j]=str[j+1];
+			str[len-1]=tmp;
+
+			if(strstr(str, sub)!=NULL)
+				return true;
+		}
+		return false;
+	}
+
+
+	bool rotateContain2(char str[], char sub[])
+	{
+		int len1=strlen(str), len2=strlen(sub);
+		char *tmp=new char(len1*2);
+		int i;
+		for(i=0; i<len1; i++)
+			tmp[i]=str[i];
+
+        int j=0;
+		for(i; i<len1*2; i++)
+			tmp[i]=str[j++];
+
+		if(strstr(tmp, sub)!=NULL)
+			return true;
+		else
+			return false;
+	}
+};
+
+int main()
+{
+	Solution s;
+	char str[]="CDAAAAAAA", sub[]="CsDAA";
+
+	cout<<s.rotateContain2(str, sub);
+	return 0;
+}
+
+
+
