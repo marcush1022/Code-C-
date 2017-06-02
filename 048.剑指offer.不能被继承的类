@@ -1,0 +1,30 @@
+
+class SealedClass
+{
+	public:
+	static SealedClass *getInstance()
+	{
+		return new SealedClass();
+	}
+	static void deleteInstance(SealedClass *instance)
+	{
+		delete instance;
+	}
+	private:
+	SealedClass() {}
+	~SealedClass() {}
+};
+
+class Try:SealedClass
+{
+	public:
+    //error: 'SealedClass::SealedClass()' is private|
+	Try() {}
+	~Try() {}
+};
+
+int main
+{
+	return 0;
+}
+
