@@ -1,0 +1,73 @@
+1. 数组
+class Solution
+{
+	public:
+	void doReverse(vector<int> &nums, int left, int right)
+	{
+		while(left<right)
+		{
+			swap(nums[left], nums[right]);
+			left++;
+			right--;
+		}
+	}
+
+	void rotateReverseArray(vector<int> &nums, int k)
+	{
+		int len=nums.size();
+		if(len==0)
+			return ;
+		int move=k%len;
+		doReverse(nums, 0, len-1);
+		doReverse(nums, 0, move-1);
+		doReverse(nums, move, len-1);
+	}
+};
+
+/**********************************************************************************/
+2. 链表
+class Solution
+{
+	public:
+	int getListLength(ListNode *head)
+	{
+		ListNode *p=head;
+		int len=0;
+		while(p)
+		{
+			p=p->next;
+			++len;
+		}
+		return len;
+	}
+
+	ListNode *rotateRight(ListNode *head, int k)
+	{
+		if(head==NULL || head->next==NULL)
+			return head;
+		int len=getListLength(head);
+		int move=k%len;
+		
+		if(move==0)
+		    return head;
+		
+		ListNode *left=head, *right=head;
+		int i=0;
+		while(i<move)
+		{
+			++i;
+			right=right->next;
+		}
+		
+		while(right->next!=NULL)
+		{
+			left=left->next;
+			right=right->next;
+		}
+		ListNode *nhead=left->next;
+		left->next=NULL;
+		right->next=head;
+		return nhead;
+	}
+
+};
