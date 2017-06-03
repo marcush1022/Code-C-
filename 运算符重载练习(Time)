@@ -14,6 +14,12 @@ class Time
 		minute=m;
 		second=s;
 	}
+	Time(const Time &other)
+	{
+	    second=other.second;
+        minute=other.minute;
+        hours=other.hours;
+	}
 	Time operator+(Time &t2);
 	Time operator++();
 	Time operator=(Time &t2);
@@ -42,20 +48,10 @@ Time Time::operator++()
 
 Time Time::operator+(Time &t2)
 {
-	Time t;
-	t.second+=t2.second;
-	t.minute+=t2.minute;
-	t.hours+=t2.hours;
-	if(second>=60)
-	{
-		t.second-=60;
-		t.minute+=(second-60);
-	}
-	if(minute>=60)
-	{
-		t.minute-=60;
-		t.hours+=(minute-60);
-	}
+    Time t;
+	t.second=second+t2.second;
+	t.minute=minute+t2.minute;
+	t.hours=hours+t2.hours;
 	return t;
 }
 
@@ -103,7 +99,10 @@ int main()
 	cout<<"t1+t2= "<<t3<<endl;
 
 	Time t4=t2;
-	cout<<"t4=t2"<<t4<<endl;
+	cout<<"t4=t2: "<<t4<<endl;
+
+	Time t5=Time(t1);
+	cout<<"t5= "<<t5<<endl;
 
 	return 0;
 }
