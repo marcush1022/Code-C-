@@ -1,0 +1,40 @@
+
+class Solution
+{
+	public:
+	int binarySearch(vector<int> &nums, int target)
+	{
+		int len=nums.size();
+		if(len==0)
+			return -1;
+		int left=0, right=len-1;
+		while(left<=right)
+		{
+			int mid=left+(right-left)/2;
+			if(nums[mid]==target)
+				return mid;
+			else if(nums[mid]>target)
+				right=mid-1;
+			else
+				left=mid+1;
+		}
+		return -1;
+	}
+/**********************************************************************************************/
+	int binarySearchRecursive(vector<int> &nums, int left, int right, int target)
+	{
+		int len=nums.size();
+		if(len==0 || left>right)
+			return -1;
+
+		int mid=left+(right-left)/2;
+		if(nums[mid]==target)
+			return mid;
+		else if(nums[mid]>target)
+			return binarySearchRecursive(nums, left, mid-1, target);
+		else
+			return binarySearchRecursive(nums, left+1, right, target);
+	}
+};
+
+
