@@ -16,6 +16,7 @@ class Time
 	}
 	Time operator+(Time &t2);
 	Time operator++();
+	Time operator=(Time &t2);
 	friend ostream& operator <<(ostream&, Time&);
 	friend ostream& operator <<(ostream&, Time*); //友元不可为虚函数
 	private:
@@ -58,6 +59,20 @@ Time Time::operator+(Time &t2)
 	return t;
 }
 
+Time Time::operator=(Time &t2)
+{
+	Time t;
+	if(t.second==t2.second && t.minute==t2.minute && t.hours==t.hours)
+		return t;
+	else
+	{
+		t.second=t2.second;
+		t.minute=t2.minute;
+		t.hours=t.hours;
+	}
+	return t;
+}
+
 ostream &operator <<(ostream &output, Time &t)
 {
 	output<<"Time= "<<t.hours<<":"<<t.minute<<":"<<t.second<<endl;
@@ -87,12 +102,8 @@ int main()
 	Time t3=t1+t2;
 	cout<<"t1+t2= "<<t3<<endl;
 
+	Time t4=t2;
+	cout<<"t4=t2"<<t4<<endl;
+
 	return 0;
 }
-
-
-
-
-
-
-
