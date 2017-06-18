@@ -1,0 +1,29 @@
+/***********************************************************************************/
+输入一颗二叉树和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。路径定义为从树的根结
+点开始往下一直到叶结点所经过的结点形成一条路径。
+/***********************************************************************************/
+
+class Solution {
+public: 
+    void dfs(TreeNode *root , int left, vector<vector<int> > &ret, vector<int> &tmp){
+        tmp.push_back(root->val);
+        if(left-root->val == 0 && !root->left && !root->right)
+            ret.push_back(tmp);
+        else {
+            if(root->left) dfs(root->left, left-root->val, ret, tmp);
+            if(root->right) dfs(root->right, left-root->val, ret, tmp);
+        }
+        tmp.pop_back();
+    }
+
+    vector<vector<int> > pathSum(TreeNode* root,int expectNumber) {
+		vector<vector<int> > ret;
+		if(root==NULL)
+			return ret;
+		vector<int> tmp;
+        int sum=0;
+		//dfs(root, expectNumber, ret, tmp);
+        dfs(root, expectNumber, ret, tmp);
+		return ret;
+    }
+};
