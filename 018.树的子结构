@@ -1,0 +1,56 @@
+/*************************************************************************************/
+输入两棵二叉树A，B，判断B是不是A的子结构。（ps：我们约定空树不是任意一个树的子结构）
+/*************************************************************************************/
+
+I.
+class Solution {
+public:
+    bool isSub(TreeNode *root1, TreeNode *root2)
+    {
+        if(root2==NULL)
+            return true;
+        if(root1==NULL)
+            return false;
+         
+        if(root1->val!=root2->val)
+            return false;
+        return isSub(root1->left, root2->left) && isSub(root1->right, root2->right);
+    }
+     
+    bool HasSubtree(TreeNode *root1, TreeNode *root2)
+    {
+        if(root1==NULL || root2==NULL)
+            return false;
+        bool res=false;
+        if(root1->val==root2->val)
+            res=isSub(root1, root2);
+        if(!res)
+            res=HasSubtree(root1->left, root2);
+        if(!res)
+            res=HasSubtree(root1->right, root2);
+        return res;
+    }
+};
+
+II. (递归过深?)
+class Solution {
+public:
+	bool isSameTree(TreeNode *root1, TreeNode *root2)
+	{
+		if(root1==NULL && root2==NULL)
+			return true;
+		if(root1==NULL || root2==NULL)
+			return false;
+		return (root1->val==root2->val && isSameTree(root1->left, root2->left) && isSameTree(root1->right, root2->right));
+	}
+
+    bool isSubtree(TreeNode* root1, TreeNode* root2)
+    {
+		if(root1==NULL)
+			return false;
+		if(root1->val==root2->val && isSameTree(root1, root2))
+			return true;
+		else
+			return isSubtree(root1->left, root2) || isSubtree(root1->right, root2);
+    }
+};
