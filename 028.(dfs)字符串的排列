@@ -1,0 +1,38 @@
+/*******************************************************************/
+题目描述
+输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,
+则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。 
+输入描述:
+输入一个字符串,长度不超过9(可能有字符重复),字符只包括大小写字母。
+/*******************************************************************/
+
+class Solution {
+public:
+    void getPermutation(string &str, int index, vector<string> &ret)
+	{
+		if(index==str.length()-1)
+		{
+			ret.push_back(str);
+			return ;
+		}
+
+        //sort(str.begin()+index, str.end());
+		for(int i=index; i<str.length(); i++)
+		{
+            if(i!=index && str[i]==str[index])
+                continue;
+			swap(str[index], str[i]);
+			getPermutation(str, index+1, ret);
+			swap(str[index], str[i]);
+		}
+	}
+
+    vector<string> Permutation(string str) {
+        vector<string> ret;
+		if(str.length()==0)
+			return ret;
+		getPermutation(str, 0, ret);
+        sort(ret.begin(), ret.end());
+		return ret;
+    }
+};
