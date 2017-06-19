@@ -1,0 +1,37 @@
+/**********************************************************************************************/
+给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方。
+
+Note: a^n=n为偶数时: a^(n/2)*a^(n/2), n为奇数时: a^(n/2)*a^(n/2)*a
+/**********************************************************************************************/
+
+class Solution {
+public:
+    bool invaild=false;
+    
+    double getPower(double base, unsigned int exp){
+        if(exp==0)
+            return 1;
+        if(exp==1)
+            return base;
+        double res=getPower(base, exp>>1);
+        res*=res;
+        if(exp&0x1==1)
+            res*=base;
+        return res;
+    }
+    
+    double Power(double base, int exp) {
+        if(base==0 && exp<0){
+            invaild=true;
+            return 0.0;
+        }
+        
+        unsigned int absExp=(unsigned int) exp;
+        if(exp<0)
+            absExp=(unsigned int) (-exp);
+        double res=getPower(base, absExp);
+        if(exp<0)
+            res=1.0/res;
+        return res;
+    }
+};
