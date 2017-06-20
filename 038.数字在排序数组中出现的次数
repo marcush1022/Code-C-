@@ -1,0 +1,55 @@
+/*****************************************************************************************************/
+题目描述
+统计一个数字在排序数组中出现的次数。
+/*****************************************************************************************************/
+
+class Solution {
+public:
+	int getFirstOfK(vector<int> nums, int k)
+	{
+		int left=0, right=nums.size()-1;
+		while(left<=right)
+		{
+			int mid=(left+right)/2;
+			if(nums[mid]==k && (mid==0 || nums[mid-1]!=k))
+				return mid;
+			else if(nums[mid]>=k)
+				right=mid-1;
+			else
+				left=mid+1;
+		}
+        return -1;
+	}
+
+	int getLastOfK(vector<int> nums, int k)
+	{
+		int left=0, right=nums.size()-1;
+		int len=nums.size();
+		while(left<=right)
+		{
+			int mid=(left+right)/2;
+			if(nums[mid]==k && (mid==len-1 || nums[mid+1]!=k))
+				return mid;
+			else if(nums[mid]<=k)
+				left=mid+1;
+			else
+				right=mid-1;
+		}
+        return -1;
+	}
+
+    int GetNumberOfK(vector<int> data ,int k) {
+        int len=data.size();
+		if(len==0)
+			return 0;
+
+		int preIndex, postIndex;
+		preIndex=getFirstOfK(data, k);
+		postIndex=getLastOfK(data, k);
+        if(preIndex>=0 && postIndex>=0)
+			return postIndex-preIndex+1;
+        else
+            return 0;
+    }
+};
+
